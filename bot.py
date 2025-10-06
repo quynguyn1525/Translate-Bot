@@ -128,16 +128,17 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Send me a voice message (Khmer) and I'll translate it into Vietnamese.")
 
 
+async def start_cleanup(app):
+    asyncio.create_task(cleanup_old_files())
+
+
 def main():
-    app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    app = ApplicationBuilder().token(TELEGRAM_TOKEN).post_init(start_cleanup).build()
+
     app.add_handler(MessageHandler(filters.VOICE, handle_voice))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
 
     logger.info("Bot started")
-
-    # Start cleanup task in background
-    asyncio.create_task(cleanup_old_files())
-
     app.run_polling()
 
 
