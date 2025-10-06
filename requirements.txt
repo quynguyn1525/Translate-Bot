@@ -3,3 +3,4 @@ pydub
 translate
 gtts
 SpeechRecognition
+python-dotenv==1.1.1

@@ -3,6 +3,7 @@ import logging
 import asyncio
 from pathlib import Path
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 from telegram import Update, InputFile
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 from pydub import AudioSegment
@@ -10,6 +11,7 @@ from translate import Translator
 from gtts import gTTS
 import speech_recognition as sr
 
+load_dotenv()
 # ---------- CONFIG ----------
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 DOWNLOADS_DIR = Path("downloads")
